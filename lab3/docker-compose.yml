@@ -1,0 +1,33 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: library_postgres_lab3
+    environment:
+      POSTGRES_USER: lib_user
+      POSTGRES_PASSWORD: lib_password
+      POSTGRES_DB: library_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # НОВЕ: Вчимо Docker перевіряти, чи готова база
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lib_user -d library_db"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+
+  api:
+    build: .
+    container_name: library_api_lab3
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://lib_user:lib_password@db:5432/library_db
+    depends_on:
+      # НОВЕ: API чекатиме, поки база не стане "здоровою" (healthy)
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
