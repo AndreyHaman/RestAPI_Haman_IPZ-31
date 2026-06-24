@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+pydantic-mongo
+motor
+pytest
+pytest-asyncio
+mongomock-motor
+httpx
