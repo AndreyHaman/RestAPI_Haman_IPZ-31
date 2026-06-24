@@ -1,0 +1,6 @@
+flask
+flask-restful
+flasgger
+pymongo
+pydantic
+pydantic-mongo
