@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pydantic
+pydantic-mongo
+motor
+pyjwt
+passlib[bcrypt]
+bcrypt==3.2.2
+redis
+fakeredis
+pytest
+pytest-asyncio
+mongomock-motor
+httpx
+pyyaml
